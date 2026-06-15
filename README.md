@@ -137,9 +137,7 @@ Input 2: The SQL fix outputs from the Data Cleaner agent
 
 A Merge node combines both streams, followed by an Aggregate node that consolidates everything into a single data package.
 
-The Report Generator Agent (Google Gemini Chat Model1) receives the full picture then groups issues into
-
-Fixed, Failed, and Needs Discussion
+The Report Generator Agent (Google Gemini Chat Model1) receives the full picture then groups issues into Fixed, Failed, and Needs Discussion
 
 Uses Create a document in Google Docs to generate a professionally formatted report with headings, spacing, and bullet points
 
