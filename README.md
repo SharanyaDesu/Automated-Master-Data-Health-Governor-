@@ -5,12 +5,16 @@ This project automates the entire database health audit process using three AI a
 # ⚙️ Tech Stack
 
 n8n --> Workflow automation platform
+
 PostgreSQL --> Target database
+
 Grok / Google Gemini --> AI models powering the agents
+
 Gmail -->  Email notifications and approvals
+
 Google Docs / Google Drive --> Report generation and sharing
 
-# Step 1 — Trigger and Database Investigation
+# Step 1 - Trigger and Database Investigation
 
 Section label in workflow: Investigate the database and list down the issues
 
@@ -24,9 +28,9 @@ This fires the Data Investigator Agent, which is powered by the Grok Chat Model.
 
 The agent is equipped with two tools:
 
-Execute a SQL Query in PostgreSQL — reads the full schema and samples rows from all tables.
+Execute a SQL Query in PostgreSQL - reads the full schema and samples rows from all tables.
 
-Call n8n Workflow Tool — allows the agent to invoke sub-workflows if needed.
+Call n8n Workflow Tool - allows the agent to invoke sub-workflows if needed.
 
 
 A Structured Output Parser formats the agent's findings into a clean JSON list of issues.
@@ -43,7 +47,7 @@ NULL values in required/non-nullable fields
 
 Delete duplicate records
 
-# Step 2 — Initial Approval Process
+# Step 2 - Initial Approval Process
 
 Section label in workflow: Initial Approval Process
 
@@ -55,7 +59,7 @@ Each issue from Step 1 is passed through a Filter node.
 
 Issues marked as "Fixable with SQL" continue to the approval flow.
 
-Issues that require policy decisions or team discussion are routed out and logged separately (via the false branch of the If node → No Operation, do nothing).
+Issues that require policy decisions or team discussion are routed out and logged separately (via the false branch of the If node --> No Operation, do nothing).
 
 For the fixable issues, an email is sent via Gmail using "Send message and wait for response" mode.
 
@@ -71,7 +75,7 @@ If the response is NO (false branch) --> the workflow stops with No Operation, d
 
 No SQL fix is ever applied without explicit human approval. This ensures full auditability.
 
-# Step 3 — Fix Issues with SQL (Data Cleaner Agent)
+# Step 3 - Fix Issues with SQL (Data Cleaner Agent)
 
 Section label in workflow: #3 Fixed with SQL
 
@@ -118,7 +122,7 @@ Executes it directly against the database
 
 Returns a fix status --> success / failed and the exact query used
 
-# Step 4 — Create Executive Summary & Deliver Report
+# Step 4 - Create Executive Summary & Deliver Report
 
 Section label in workflow: #4 Create Executive Summary
 
@@ -128,7 +132,7 @@ Section label in workflow: #4 Create Executive Summary
 
 Results from two paths are combined:
 
-Input 1: The original issue list (all issues found — fixed and unfixed)
+Input 1: The original issue list (all issues found - fixed and unfixed)
 
 Input 2: The SQL fix outputs from the Data Cleaner agent
 
@@ -166,14 +170,21 @@ Which need team policy discussion
 
 
 Note
+
 Actual workflow files and datasets are not included for security and privacy reasons as it contains database credentials, API keys. Workflow architecture images are provided.
 
 # Final Outcome
+
 Trigger --> One click (manual or scheduled)
+
 Database scan --> Fully automated by AI agent
+
 Approval --> Human in the loop before any fix
+
 Data fixes --> Applied automatically with SQL
+
 Report --> Google Doc created, shared, and emailed
+
 Team visibility --> Everyone receives the link via Gmail
 
 
