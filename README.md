@@ -96,9 +96,7 @@ Approve / Reject buttons
 
 The workflow waits for the per-issue response, evaluated in the If1 node.
 
-If approved (true branch), the Data Cleaner Agent runs:
-
-Powered by Google Gemini Chat Model
+If approved (true branch), the Data Cleaner Agent runs --> Powered by Google Gemini Chat Model
 
 Tools available to it:
 
